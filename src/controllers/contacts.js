@@ -2,10 +2,9 @@ import createHttpError from 'http-errors';
 import {
   getAllContacts,
   getContactById,
-  createContact,
+  postContact,
   deleteContact,
   updateContact,
-  upsertContact,
 } from '../services/contacts.js';
 
 export const getContactsController = async (req, res, next) => {
@@ -23,7 +22,7 @@ export const getContactByIdController = async (req, res, next) => {
   const contact = await getContactById(contactId);
 
   if (!contact) {
-    throw createHttpError(404, 'Student not found');
+    throw createHttpError(404, 'Contact not found');
   }
 
   res.json({
@@ -34,7 +33,7 @@ export const getContactByIdController = async (req, res, next) => {
 };
 
 export const createContactController = async (req, res, next) => {
-  const contact = await createContact(req.body);
+  const contact = await postContact(req.body);
 
   res.status(201).json({
     status: 201,
@@ -57,7 +56,6 @@ export const deleteContactController = async (req, res, next) => {
 
 export const upsertContactController = async (req, res, next) => {
   const { contactId } = req.params;
-
   const result = await updateContact(contactId, req.body, {
     upsert: true,
   });
@@ -78,7 +76,7 @@ export const upsertContactController = async (req, res, next) => {
 
 export const patchContactController = async (req, res, next) => {
   const { contactId } = req.params;
-  const result = await upsertContact(contactId, req.body);
+  const result = await updateContact(contactId, req.body);
 
   if (!result) {
     next(createHttpError(404, 'Contact not found'));
