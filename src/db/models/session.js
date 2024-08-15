@@ -14,4 +14,4 @@ const sessionsSchema = new Schema(
   },
 );
 
-export const SessionCollection = model('sessions', sessionsSchema);
+export const SessionsCollection = model('sessions', sessionsSchema);
