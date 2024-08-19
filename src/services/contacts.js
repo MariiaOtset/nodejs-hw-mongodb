@@ -50,7 +50,7 @@ export const deleteContact = (filters) =>
 
 export const updateContact = async (filters, payload, options = {}) => {
   const rawResult = await ContactsCollection.findOneAndUpdate(
-    { _id: contactId },
+    filters,
     payload,
     {
       new: true,
@@ -66,7 +66,3 @@ export const updateContact = async (filters, payload, options = {}) => {
     isNew: Boolean(rawResult?.lastErrorObject?.upserted),
   };
 };
-
-const updateContact = (filter, payload) =>
-  Contact.findOneAndUpdate(filter, payload, { new: true });
-///
