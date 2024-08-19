@@ -7,15 +7,15 @@ import {
 import { THIRTY_DAYS } from '../constants/index.js';
 
 const setupSession = (res, session) => {
-    res.cookie('refreshToken', session.refreshToken, {
-      httpOnly: true,
-      expires: new Date(Date.now() + THIRTY_DAYS),
-    });
-    res.cookie('sessionId', session._id, {
-      httpOnly: true,
-      expires: new Date(Date.now() + THIRTY_DAYS),
-    });
-  };
+  res.cookie('refreshToken', session.refreshToken, {
+    httpOnly: true,
+    expires: new Date(Date.now() + THIRTY_DAYS),
+  });
+  res.cookie('sessionId', session._id, {
+    httpOnly: true,
+    expires: new Date(Date.now() + THIRTY_DAYS),
+  });
+};
 
 export const registerUserController = async (req, res) => {
   const user = await registerUser(req.body);
@@ -40,9 +40,9 @@ export const loginUserController = async (req, res) => {
 };
 
 export const logoutUserController = async (req, res) => {
-    if(req.cookies.sessionId) {
-        await logoutUser(res.cookies.sessionId);
-    }
+  if (req.cookies.sessionId) {
+    await logoutUser(req.cookies.sessionId);
+  }
 
   res.clearCookie('sessionId');
   res.clearCookie('refreshToken');
@@ -60,9 +60,9 @@ export const refreshUsersSessionsController = async (req, res) => {
 
   res.json({
     status: 200,
-    message: "Successfully refreshed a session!",
+    message: 'Successfully refreshed a session!',
     data: {
-        accessToken: session.accessToken,
+      accessToken: session.accessToken,
     },
   });
 };

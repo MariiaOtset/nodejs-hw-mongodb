@@ -7,7 +7,7 @@ import {
   upsertContactController,
   patchContactController,
 } from '../controllers/contacts.js';
-import { ctrlWrapper } from '../utils/ctrlWrapper';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/vallidateBody.js';
 import {
   createContactSchema,

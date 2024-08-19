@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ctrlWrapper } from '../utils/ctrlWrapper';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/vallidateBody.js';
 import { registerUserSchema, loginUserSchema } from '../validation/auth.js';
 import {
