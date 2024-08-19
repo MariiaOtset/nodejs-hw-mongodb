@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import {
   getContactsController,
-  getContactByIdController,
+  getOneContactController,
   createContactController,
   deleteContactController,
   upsertContactController,
@@ -25,10 +25,11 @@ router.use(authenticate);
 
 router.get('/', isUser, ctrlWrapper(getContactsController));
 
-router.get('/:contactId', isUser, ctrlWrapper(getContactByIdController));
+router.get('/:contactId', isUser, ctrlWrapper(getOneContactController));
 
 router.post(
-  '/', isUser,
+  '/',
+  isUser,
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );
@@ -38,13 +39,15 @@ router.delete('/:contactId', isUser, ctrlWrapper(deleteContactController));
 router.put(
   '/:contactId',
   validateBody(createContactSchema),
-  ctrlWrapper(upsertContactController), isUser,
+  ctrlWrapper(upsertContactController),
+  isUser,
 );
 
 router.patch(
   '/:contactId',
   validateBody(updateContactSchema),
-  ctrlWrapper(patchContactController), isUser,
+  ctrlWrapper(patchContactController),
+  isUser,
 );
 
 export default router;

@@ -14,7 +14,7 @@ const contactSchema = new Schema(
       type: String,
       required: false,
     },
-    isFavourite: {
+    isFavorite: {
       type: Boolean,
       default: false,
     },
@@ -28,7 +28,7 @@ const contactSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'users',
       required: true,
-    }
+    },
   },
   {
     timestamps: true,
