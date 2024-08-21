@@ -7,7 +7,7 @@ import {
   loginUserController,
   logoutUserController,
   refreshUsersSessionsController,
-  sendResetEmailController,
+  requestResetEmailController,
   resetPasswordController,
 } from '../controllers/auth.js';
 
@@ -29,7 +29,7 @@ router.post('/logout', ctrlWrapper(logoutUserController));
 
 router.post('/refresh', ctrlWrapper(refreshUsersSessionsController));
 
-router.post('/send-reset-email', validateBody(sendResetEmailSchema), ctrlWrapper(sendResetEmailController));
+router.post('/send-reset-email', validateBody(sendResetEmailSchema), ctrlWrapper(requestResetEmailController));
 
 router.post('/reset-password', validateBody(resetPasswordSchema), ctrlWrapper(resetPasswordController));
 

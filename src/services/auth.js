@@ -84,14 +84,20 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
   });
 };
 
-export const sendResetToken = async (email) => {
+export const requestResetToken = async (email) => {
  const user = await UsersCollection.findOne({ email });
 
  if(!user) {
   throw createHttpError(404, 'User not found');
  }
 
- const resetToken = jwt.sign()
+ const resetToken = jwt.sign({
+  {
+    sub: user._id,
+    email,
+  },
+  env('JWT_SECRET'),
+ });
 };
 
 // export const resetPassword = async (email) => {
