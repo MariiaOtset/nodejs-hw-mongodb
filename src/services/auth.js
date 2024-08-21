@@ -1,9 +1,16 @@
 import bcrypt from 'bcrypt';
 import createHttpError from 'http-errors';
+import jwt from 'jsonwebtoken';
 import { randomBytes } from 'crypto';
+import handlebars from 'handlebars';
+import path from 'node:path';
+import fs from 'node:fs/promises';;
 import { FIFTEEN_MINUTES, THIRTY_DAYS } from '../constants/index.js';
 import { SessionsCollection } from '../db/models/session.js';
 import { UsersCollection } from '../db/models/user.js';
+import { env } from '../utils/env.js';
+import { sendEmail } from '../utils/sendMail.js';
+import { TEMPLATES_DIR } from '../constants/index.js';
 
 const createSession = () => {
   const accessToken = randomBytes(30).toString('base64');
@@ -76,3 +83,18 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
     ...newSession,
   });
 };
+
+export const sendResetToken = async (email) => {
+ const user = await UsersCollection.findOne({ email });
+
+ if(!user) {
+  throw createHttpError(404, 'User not found');
+ }
+
+ const resetToken = jwt.sign()
+};
+
+// export const resetPassword = async (email) => {
+//   const
+// };
+
