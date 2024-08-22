@@ -70,8 +70,9 @@ export const refreshUsersSessionsController = async (req, res) => {
 };
 
 export const requestResetEmailController = async (req, res) => {
-  const email = await requestResetToken(req.body);
+  await requestResetToken(req.body.email);
 
+  res.json({});
 };
 
 export const resetPasswordController = async (req, res) => {
