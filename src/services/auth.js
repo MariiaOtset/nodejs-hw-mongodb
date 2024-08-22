@@ -9,7 +9,7 @@ import { FIFTEEN_MINUTES, THIRTY_DAYS, SMTP } from '../constants/index.js';
 import { SessionsCollection } from '../db/models/session.js';
 import { UsersCollection } from '../db/models/user.js';
 import { env } from '../utils/env.js';
-import { sendEmail } from '../utils/sendMail.js';
+import { sendEmail } from '../utils/sendEmail.js';
 import { TEMPLATES_DIR } from '../constants/index.js';
 
 const createSession = () => {
